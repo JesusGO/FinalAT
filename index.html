@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aparcamientos en Madrid</title>
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin=""/>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/master.css">
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-inverse nomar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 217.36 217.36" style="enable-background:new 0 0 217.36 217.36;" xml:space="preserve" width="25px" height="25px">
+            <g><g id="Layer_1_20_">
+              <path d="M44.934,208.06H3.799c-2.1,0-3.799-1.699-3.799-3.799V13.099C0,10.999,1.699,9.3,3.799,9.3h41.135    c2.1,0,3.799,1.699,3.799,3.799s-1.699,3.799-3.799,3.799H7.601v183.561h37.332c2.1,0,3.799,1.699,3.799,3.799    S47.033,208.06,44.934,208.06z M217.36,204.257V13.099c0-2.1-1.699-3.799-3.799-3.799h-41.135c-2.1,0-3.799,1.699-3.799,3.799    s1.699,3.799,3.799,3.799h37.332v183.561h-37.332c-2.1,0-3.799,1.699-3.799,3.799s1.699,3.799,3.799,3.799h41.135    C215.657,208.06,217.36,206.357,217.36,204.257z M158.792,91.224c0,26.815-21.768,48.582-48.582,48.582H81.049v38.835H61.631    V42.641h48.578C137.02,42.645,158.792,64.409,158.792,91.224z M139.336,91.224c0-16.139-13.022-29.161-29.13-29.161H81.045v58.291    h29.161C126.314,120.354,139.336,107.332,139.336,91.224z" fill="#45ca76"/>
+            </g></g>
+          </svg>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav" role="tablist">
+          <li role="presentation" class="active"><a href="#aparcamientos" aria-controls="aparcamientos" role="tab" data-toggle="tab"><i class="fa fa-product-hunt" aria-hidden="true"></i> Aparcamientos <span class="sr-only">(current)</span></a></li>
+          <li id="nav-cole" role="presentation" class="disabled"><a href="#colecciones" aria-controls="colecciones" role="tab" data-toggle="tab"><i class="fa fa-th-list" aria-hidden="true"></i> Colecciones</a></li>
+          <li id="nav-insta" role="presentation" class="disabled"><a href="#instalaciones" aria-controls="instalaciones" role="tab" data-toggle="tab"><i class="fa fa-building" aria-hidden="true"></i> Instalaciones</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="btn-modal" data-toggle="modal" data-target="#cargar"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Cargar</a></li>
+          <li><a class="btn-modal" data-toggle="modal" data-target="#salvar"><i class="fa fa-cloud-download" aria-hidden="true"></i> Salvar</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div id="cover">
+    <h1 class="text-center">APARCAMIENTOS EN MADRID</h1>
+    <div id="sub-cover"></div>
+  </div>
+
+	<div id="tabs" class="container-fluid nopad">
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="aparcamientos">
+        <div id="welcome">
+          <div class="icon-download">
+            <i id="download" class="fa fa-cloud-download" aria-hidden="true"></i>
+          </div>
+          <div class="icon-loading">
+            <i id="loading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="info-welcome">
+            <p class="lead">Descarga los aparcamientos del ayuntamiento de Madrid</p>
+          </div>
+        </div>
+
+				<div id="map_main">
+					<div class="col-md-6">
+            <div id="mapid">
+
+            </div>
+            <div class="col-md-12">
+              <div id="btn-colections" type="button" class="btn-modal btn-colecciones"  data-toggle="modal" data-target="#coleccionesModal">
+                <i class="fa fa-bookmark-o" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Colecciones"></i>
+              </div>
+            </div>
+
+            <div id="info-main" class="col-md-12">
+              <h1><span id="main-title"></span> <small><span id="main-street"></span></small></h1>
+              <div id="carousel-generic" class="carousel slide" >
+                <ol id="main-indi" class="carousel-indicators">
+                </ol>
+                <div id="main-images" class="carousel-inner" role="listbox">
+                </div>
+                <a class="left carousel-control" href="#carousel-generic" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-generic" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+				</div>
+
+				<div id="list_parking">
+					<div class="col-md-6">
+						<div id="parking">
+						</div>
+
+
+
+					</div>
+				</div>
+
+			</div>
+			<div role="tabpanel" class="tab-pane" id="colecciones">
+        <div class="container-fuid">
+
+          <div class="col-md-4 nopad">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Parkings</h3>
+              </div>
+              <div class="panel-body nopad">
+                <ul id="list-pa" class="list-group">
+
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-4 nopad">
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Nueva Coleccion</h3>
+              </div>
+              <div class="panel-body">
+                <div>
+                  <div class="form-group">
+                    <label for="NaCol">Nombre de la coleccion</label>
+                    <input type="text" class="form-control" id="NaCol" placeholder="Coleccion">
+                  </div>
+                  <div class="form-group">
+                    <div class="box-drop droppable">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <button id="submit-add-colec" type="submit" class="btn btn-default btn-block"><i class="fa fa-check-square" aria-hidden="true"></i></button>
+                </div>
+                <div class="">
+                  <h4>Parking añadidos:</h4>
+                  <ul id="list-pa-added" class="list-group">
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-4 nopad">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Mis Colecciones</h3>
+              </div>
+              <div class="panel-body">
+                <div class="panel-group" id="mycolec" role="tablist" aria-multiselectable="true">
+
+                </div>
+                <!--<ul id="mycolec" class="list-group">
+
+                </ul>-->
+              </div>
+            </div>
+
+          </div>
+        </div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="instalaciones">
+				<div class="container-fluid">
+          <h1><span id="insta-title"></span> <small><span id="insta-street"></span></small></h1>
+
+          <div class="col-md-4">
+            <div id="carousel-example-generic" class="carousel slide" >
+              <ol id="insta-indi" class="carousel-indicators">
+              </ol>
+              <div id="insta-images" class="carousel-inner" role="listbox">
+              </div>
+              <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+            <div id="google" class="col-md-12">
+              <h2>USUARIOS <i id="search_google" class="fa fa-google-plus-official" aria-hidden="true"></i><i id="spinner_users" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></h2>
+              <div class="col-md-6 nopad">
+                <ul id="list-users" class="list-group">
+
+                </ul>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-8">
+
+            <div class="col-md-12">
+              <p id="insta-desc" class="lead">
+
+              </p>
+            </div>
+
+            <div class="col-md-4 box-info">
+              <div class="panel panel-default">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <div class="panel-body">
+                  <span id="insta-loca"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 box-info">
+              <div class="panel panel-default">
+                <i class="fa fa-compass" aria-hidden="true"></i>
+                <div class="panel-body">
+                  <span id="insta-lat"></span>
+                  <span id="insta-long"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 box-info">
+              <div class="panel panel-default">
+                <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                <div class="panel-body">
+                  <span id="insta-postal"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <h2>Lista Usuarios</h2>
+              <div id="insta_id" class="add_user" data="">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <ul id="lista_users_parking" class="list-group">
+
+              </ul>
+
+            </div>
+            <div class="col-md-9">
+              <div id="insta-map">
+
+              </div>
+            </div>
+
+
+          </div>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="coleccionesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Mis Colecciones</h4>
+        </div>
+        <div id="modal-cole-main" class="modal-body">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="cargar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">CARGAR</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputFichload">Nombre Fichero</label>
+          <input type="text" class="form-control" id="inputFichload" placeholder="Nombre Fichero">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="btn_load" type="button" class="btn btn-primary">Cargar json</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="salvar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">SALVAR</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputToken">Token</label>
+          <input type="text" class="form-control" id="inputToken" placeholder="Token">
+        </div>
+        <div class="form-group">
+          <label for="inputRepo">Repositorio</label>
+          <input type="text" class="form-control" id="inputRepo" placeholder="Repositorio">
+        </div>
+        <div class="form-group">
+          <label for="inputFich">Nombre Fichero</label>
+          <input type="text" class="form-control" id="inputFich" placeholder="Nombre Fichero">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="btn_save" type="button" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<!--<script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+  <script src="js/jquery.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--	<script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+-->
+  <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+  <script src="js/github.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg==" crossorigin=""></script>
+	<script src="js/master.js"></script>
+
+</body>
+</html>
