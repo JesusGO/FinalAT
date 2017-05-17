@@ -336,10 +336,7 @@ function getObjParkingsFromJson(){
 function loadFileGithub() {
 	var fich=$("#inputFichload").val();
 
-	var gh = new Github({
-		token : '6aa653199e091d9862869315768a70f3fa72e822',
-		auth : "oauth"
-	});
+	var gh = new Github("JesusGO", "AT");
 
 	var repo=gh.getRepo("JesusGO", "AT");
 
